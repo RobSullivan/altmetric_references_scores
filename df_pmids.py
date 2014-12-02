@@ -1,7 +1,6 @@
 '''
 
 First pass at combining @almetric scores for an article and its referencese using pandas
-https://gist.github.com/RobSullivan/62be3c30dbf7ad8fb984
 
 Data collected from http://www.altmetric.com/ and https://pmc-ref.herokuapp.com
 
