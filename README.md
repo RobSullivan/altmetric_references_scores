@@ -1,6 +1,3 @@
-altmetric_references_scores
-===========================
-
 #Plotting the Almetric scores for an article and its references
 
 ##What is it?
@@ -8,7 +5,7 @@ altmetric_references_scores
 This script plots a histogram of the altmetric scores for an article and its references
 
 ##How does it work?
-Using a doi (digital object identifier) this script requests the references of an article from the pmc-ref API (https://pmc-ref.herokuapp.com/). It then extracts the pmids of the article and references. 
+Using a doi (digital object identifier) this script requests the references of an article from the pmc-ref API ([https://pmc-ref.herokuapp.com/]). It then extracts the pmids of the article and references. 
 
 Using the pmids it requests data from  requesting  and then goes to http://api.altmetric.com/v1/pmid/ for altmetric data.
 
