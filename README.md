@@ -15,10 +15,10 @@ From the DataFrame a simple histogram can be generated.
 
 
 ###Modules used
--ipython==2.3.1
--requests==2.4.3
--pandas==0.15.1
--numpy==1.9.1
--matplotlib==1.4.2
+- ipython==2.3.1
+- requests==2.4.3
+- pandas==0.15.1
+- numpy==1.9.1
+- matplotlib==1.4.2
 
 
