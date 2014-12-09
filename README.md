@@ -14,11 +14,11 @@ Each response from almetric.com is stored as a pandas Series in a dict_of_series
 From the DataFrame a simple histogram can be generated.
 
 
-###modules used
-ipython==2.3.1
-requests==2.4.3
-pandas==0.15.1
-numpy==1.9.1
-matplotlib==1.4.2
+###Modules used
+-ipython==2.3.1
+-requests==2.4.3
+-pandas==0.15.1
+-numpy==1.9.1
+-matplotlib==1.4.2
 
 
