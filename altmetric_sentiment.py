@@ -1,14 +1,25 @@
 '''
 
-First pass at combining @almetric scores for an article and its referencese using pandas
+A bit of fun combinging altmetric and text-processing APIs to get sentiment of tq (top quote) field 
+from altmetric response.
 
-Data collected from http://www.altmetric.com/ and https://pmc-ref.herokuapp.com
+APIs used and rate limits:
+http://www.altmetric.com/ one per second
+http://text-processing.com/api/sentiment/ 1000 calls per IP per day
+https://pmc-ref.herokuapp.com/ none but pmc-ref is a prototype with limited data available and any performance issues with this script will probably be due to pmc-ref.
 
-pmc-ref is a prototype with limited data available. Any performance issues with this script will probably be due to pmc-ref.
+
+Results stored in pandas DataFrame called altmetric_data_frame.
+
+text-processing sentiment analyser is trained on movie reviews. 
+
+tq can store more than one top quote. In these cases each elem of the list is joined 
+together. The asuumption is the sentiment of tq is the same but that could be wrong.
 
 Suggestions for improvements welcome! 
 
-Use ipython --pylab
+
+
 
 '''
 import requests
@@ -19,7 +30,7 @@ import time
 
 
 
-pmc_ref_request = requests.get('https://pmc-ref.herokuapp.com/api/v1/articles/doi/10.1007%2Fs00439-013-1358-4') #10.1038/nature10158
+pmc_ref_request = requests.get('https://pmc-ref.herokuapp.com/api/v1/articles/doi/10.1007%2Fs00439-013-1358-4') #implement /citations/ endpoint rather than getting references
 
 article = pmc_ref_request.json()
 
@@ -65,13 +76,27 @@ altmetric_data_frame = frame.T
 top_quotes_values = altmetric_data_frame.tq.dropna()
 text_processing_base_url = 'http://text-processing.com/api/sentiment/'
 
-for quote in top_quotes_values:
-	text_data = {'text': ''.join(str(elem) for elem in quote)}
+empty_str = ''
+sentiment = {}
+
+for key in top_quotes_values.keys():
+	text_data = {'text': empty_str.join(str(elem) for elem in top_quotes_values[key])}
 	text_processing_request = requests.post(text_processing_base_url, data=text_data)
-	sentiment
+	sentiment[key] = text_processing_request.json()
+	
+
+altmetric_data_frame['sentiment'] = ''
+
+for pmid in altmetric_data_frame.pmid:
+	if pmid in sentiment.keys():
+		altmetric_data_frame.ix[pmid]['sentiment'] = sentiment[pmid]['label'] # discarding probablity values
+	else:
+		altmetric_data_frame.ix[pmid]['sentiment'] = None
 
 
-
+positive_sentiment = altmetric_data_frame[altmetric_data_frame.sentiment == 'pos']
+negative_sentiment = altmetric_data_frame[altmetric_data_frame.sentiment == 'neg']
+neutral_sentiment = altmetric_data_frame[altmetric_data_frame.sentiment == 'neutral']
 
 
 
