@@ -1,6 +1,6 @@
 '''
 
-A bit of fun combinging altmetric and text-processing APIs to get sentiment of tq (top quote) field 
+A bit of fun combinging altmetric and text-processing APIs to get sentiment of tq (tq = "Some descriptive phrases for this article.") field 
 from altmetric response.
 
 APIs used and rate limits:
