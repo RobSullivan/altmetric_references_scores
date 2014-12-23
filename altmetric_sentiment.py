@@ -13,8 +13,20 @@ Results stored in pandas DataFrame called altmetric_data_frame.
 
 text-processing sentiment analyser is trained on movie reviews. 
 
-tq can store more than one top quote. In these cases each elem of the list is joined 
+tq field can store more than one top quote. In these cases each elem of the list is joined 
 together. The asuumption is the sentiment of tq is the same but that could be wrong.
+
+Have found that sentiment doesn't necessarily concern the article but can in some cases be agreeing with the conclusion of the article.
+
+For example, some extracts considered negative sentiment: 
+
+"pesky little genome acquisitions which make our energy are showing signs of influencing 1:500 childhood disease", 
+"27&percent; of mutations found to be common polymorphs or misannotated. Need better mutation dbs 4 carrier testing (Kingsmore)", 
+"Not a 'knockout'? Guo et al. provide insight into the molecular mechanisms by which mutant alleles cause disease"
+
+To read:
+
+http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-856.pdf by @awaisathar
 
 Suggestions for improvements welcome! 
 
